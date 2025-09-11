@@ -1,4 +1,5 @@
 import Counter from "./components/Counter"
+import Dice from "./components/Dice"
 import Profile from "./components/Profile"
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <Counter />
       <Profile />
+      <Dice />
     </>
   )
 }
