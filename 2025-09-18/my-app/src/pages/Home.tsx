@@ -22,13 +22,13 @@ export default function Home() {
         <CardContent>
           <Stack spacing={2}>
             <TextField
-              label="Otsi midagi"
+              label="Search"
               value={query}
               onChange={e => setQuery(e.target.value)}
-              placeholder="sisesta tekst..."
+              placeholder="enter text..."
               fullWidth
             />
-            <Button variant="contained">Otsi</Button>
+            <Button color="secondary" variant="contained">Search</Button>
           </Stack>
         </CardContent>
       </Card>
