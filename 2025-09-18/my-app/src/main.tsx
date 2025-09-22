@@ -7,6 +7,7 @@ import Something from "./pages/Something"
 import About from "./pages/About"
 import RootLayout from "./components/RootLayout"
 import Home from "./pages/Home"
+import Profile from "./pages/Profile"
 
 const router = createHashRouter([
   {
@@ -16,6 +17,7 @@ const router = createHashRouter([
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
       { path: "something", element: <Something /> },
+      { path: "profile", element: <Profile /> },
     ],
   },
 ])
