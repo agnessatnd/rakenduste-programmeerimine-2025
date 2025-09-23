@@ -1,4 +1,5 @@
-import { useState } from "react"
+//import { useState } from "react"
+import useLocalStorage from "../hooks/useLocalStorage"
 import {
   Box,
   Card,
@@ -13,8 +14,8 @@ import {
 } from "@mui/material"
 
 export default function Profile() {
-  const [email, setEmail] = useState("")
-  const [text, setText] = useState("")
+  const [email, setEmail] = useLocalStorage("email", "")
+  const [text, setText] = useLocalStorage("message", "")
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
