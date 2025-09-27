@@ -14,6 +14,13 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.use((err, req, res, next) => {
+  console.error(err);
+  res
+    .status(err.status || 500)
+    .json({ message: err.message || "Server error" });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
