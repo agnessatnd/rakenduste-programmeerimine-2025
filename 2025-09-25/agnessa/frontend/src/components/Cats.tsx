@@ -4,13 +4,12 @@ import {
   ListItem,
   ListItemText,
   Typography,
-  IconButton,
   Stack,
 } from "@mui/material"
-import EditIcon from "@mui/icons-material/Edit"
-import DeleteIcon from "@mui/icons-material/Delete"
 import { useEffect, useState } from "react"
 import SubmitCat from "./SubmitCat"
+import UpdateCat from "./UpdateCat"
+import DeleteCat from "./DeleteCat"
 
 type Cat = {
   id: string
@@ -34,22 +33,6 @@ const Cats = () => {
     fetchCats()
   }, [])
 
-  const rename = async (id: string, current: string) => {
-    const name = prompt("New name?", current || "")
-    if (!name) return
-    await fetch(`http://localhost:3000/cats/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
-    })
-    fetchCats()
-  }
-
-  const remove = async (id: string) => {
-    await fetch(`http://localhost:3000/cats/${id}`, { method: "DELETE" })
-    fetchCats()
-  }
-
   return (
     <Box>
       <Typography
@@ -68,19 +51,15 @@ const Cats = () => {
                 direction="row"
                 spacing={1}
               >
-                <IconButton
-                  aria-label="edit"
-                  onClick={() => rename(cat.id, cat.name)}
-                >
-                  <EditIcon />
-                </IconButton>
-                <IconButton
-                  aria-label="delete"
-                  color="error"
-                  onClick={() => remove(cat.id)}
-                >
-                  <DeleteIcon />
-                </IconButton>
+                <UpdateCat
+                  id={cat.id}
+                  currentName={cat.name}
+                  fetchCats={fetchCats}
+                />
+                <DeleteCat
+                  id={cat.id}
+                  fetchCats={fetchCats}
+                />
               </Stack>
             }
           >
