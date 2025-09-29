@@ -79,3 +79,16 @@ exports.delete = (req, res, next) => {
     next(e);
   }
 };
+
+exports.getAll = () => {
+  return todos;
+};
+
+exports.toggle = (id) => {
+  const idx = todos.findIndex((t) => t.id === id);
+  if (idx === -1) return null;
+  todos[idx].archived = !todos[idx].archived;
+  todos[idx].updatedAt = Date.now();
+  todos[idx].archivedAt = todos[idx].archived ? Date.now() : null;
+  return todos[idx];
+};
