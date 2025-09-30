@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.use(adminRouteMiddleware);
 
-router.get("/todos", admin.readArchived);
+router.get("/todos", admin.readAll);
 
 router.patch("/todos/:id/toggle", param("id").isUUID(), admin.toggle);
 
