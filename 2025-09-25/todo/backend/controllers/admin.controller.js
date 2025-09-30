@@ -1,10 +1,10 @@
 const { validationResult } = require("express-validator");
 const todosController = require("./todos.controller");
 
-exports.readArchived = (req, res, next) => {
+exports.readAll = (req, res, next) => {
   try {
-    const archived = todosController.getAll().filter((t) => t.archived);
-    res.json(archived);
+    const all = todosController.getAll();
+    res.json(all);
   } catch (e) {
     next(e);
   }
