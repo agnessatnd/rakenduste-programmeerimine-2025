@@ -42,16 +42,22 @@ export default function AdminTodos() {
     load()
   }, [])
 
-  const restore = async (id: string) => {
+  const toggle = async (id: string) => {
     try {
       const r = await fetch(`http://localhost:3000/admin/todos/${id}/toggle`, {
         method: "PATCH",
       })
       if (r.ok) {
-        await load()
-        setSnack({ open: true, msg: "Todo restored", severity: "success" })
+        setTodos(prev =>
+          prev.map(t => (t.id === id ? { ...t, archived: !t.archived } : t)),
+        )
+        setSnack({
+          open: true,
+          msg: "Todo status updated",
+          severity: "success",
+        })
       } else {
-        setSnack({ open: true, msg: "Restore failed", severity: "error" })
+        setSnack({ open: true, msg: "Toggle failed", severity: "error" })
       }
     } catch {
       setSnack({ open: true, msg: "Network error", severity: "error" })
@@ -78,17 +84,17 @@ export default function AdminTodos() {
               >
                 <Button
                   variant="outlined"
-                  color="success"
-                  onClick={() => restore(t.id)}
+                  color={t.archived ? "success" : "warning"}
+                  onClick={() => toggle(t.id)}
                 >
-                  Restore
+                  {t.archived ? "Restore" : "Archive"}
                 </Button>
               </Stack>
             }
           >
             <ListItemText
               primary={t.title}
-              secondary="Status: Archived"
+              secondary={t.archived ? "Status: Archived" : "Status: Active"}
             />
           </ListItem>
         ))}
